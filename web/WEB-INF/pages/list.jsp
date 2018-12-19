@@ -32,6 +32,10 @@
         欢迎${user.username}
         <input type="submit" value="退出">
     </form>
+    <form method="post">
+        <input type="text" name="text" value="${text}">
+        <input type="submit" value="搜索">
+    </form>
 
     <table>
         <thead>

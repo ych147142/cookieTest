@@ -35,12 +35,12 @@ public class DoAddServlet extends HttpServlet {
         /*输出流 向指定位置写数据*/
         OutputStream os = new FileOutputStream(file);
         /*文件接收*/
-        byte [] b = new byte[1024];
         InputStream is = part.getInputStream();
-        int a = is.read(b,0,b.length);
+        byte [] b = new byte[is.available()];
+        int a = is.read(b);
         while (a != -1){
             os.write(b);
-            a = is.read(b,0,b.length);
+            a = is.read(b);
         }
 
         String des = req.getParameter("des");

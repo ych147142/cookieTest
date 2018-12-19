@@ -10,4 +10,5 @@ public interface IProductDao {
     public int dele(int id);
     public Product getOne(int id);
     public int update(Product product);
+    public List<Product> getResults(String text);
 }

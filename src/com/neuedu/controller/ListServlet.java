@@ -21,7 +21,7 @@ public class ListServlet extends HttpServlet {
     private IProductService service = new ProductServiceImpl();
     private IUserService uservice = new UserServiceImpl();
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Cookie[] cookies = req.getCookies();
         Map<String,Cookie> maps = CookieUtil.getCookie(cookies);
@@ -42,4 +42,20 @@ public class ListServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String text = req.getParameter("text");
+        System.out.println(text);
+        if (text == "" || text.equals(" ")){
+            List<Product> lists = service.getLists();
+            req.setAttribute("lists",lists);
+            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+        }else {
+            List<Product> lists = service.getResults(text);
+            req.setAttribute("text",text);
+            req.setAttribute("lists",lists);
+            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+        }
+    }
 }

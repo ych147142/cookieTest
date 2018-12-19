@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/path.jsp"%><%--绝对路径--%>
 <html>
 <head>
     <title>Title</title>
@@ -19,7 +20,7 @@
         <input type="button" value="注册" disabled="disabled" id="btn" >
     </form>
 
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="${path}/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
 
         $(function () {
@@ -34,7 +35,7 @@
                 pwds = $("#pwds").val();
                 tele = $("#tele").val();
                 $.ajax({
-                    url:"doRegister",
+                    url:"${path}/doRegister",
                     type:"get",
                     data:{"uname":un,"pwd":pwd,"pwds":pwd,"tele":tele},
                     success:function(result){
@@ -59,7 +60,7 @@
 
             $("#btn").click(function () {
                $.ajax({
-                   url:"doIt",
+                   url:"${path}/doIt",
                    type:"post",
                    data:{"uname":un,"pwd":pwd,"pwds":pwd,"tele":tele},
                    success:function (data) {

@@ -27,12 +27,13 @@ public class DoLoginServlet extends HttpServlet {
                 coon.setMaxAge(60*60*24*7);//账户保存时间
                 coop.setMaxAge(60*60*24*7);//密码保存时间
                 resp.addCookie(coon);
-                resp.addCookie(coop);
+                resp.addCookie(coop);//添加cookie
                 HttpSession session = req.getSession();
                 session.setAttribute("user",user);
                 resp.sendRedirect("list");
-
             }
+
+
         }
     }
 }
