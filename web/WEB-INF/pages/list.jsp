@@ -24,6 +24,27 @@
         table tbody tr:nth-child(odd){
             background-color: antiquewhite;
         }
+        ul li{
+            border: 1px #000 solid;
+            float: left;
+            list-style: none;
+
+            line-height: 30px;
+            text-align: center;
+        }
+        ul .page{
+            height: 30px;
+            width: 80px;
+        }
+        ul .page1{
+            width: 30px;
+        }
+        ul li a{
+            text-decoration: none;
+            display: block;
+        }
+
+
     </style>
 </head>
 <body>
@@ -50,7 +71,7 @@
         </thead>
         <tbody>
         <%--tl--%>
-            <c:forEach items="${lists}" var="p">
+            <c:forEach items="${data.lists}" var="p">
                 <tr>
                     <td>${p.productId}</td>
                     <td>${p.productName}</td>
@@ -64,6 +85,8 @@
         </tbody>
     </table>
     <a href="add"><input type="button"value="添加"></a>
-
+    <ul>
+        ${data.pageView}
+    </ul>
 </body>
 </html>

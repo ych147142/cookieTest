@@ -19,7 +19,7 @@ public class DoAddServlet extends HttpServlet {
     private IProductService service = new ProductServiceImpl();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         Double price =Double.parseDouble(req.getParameter("price"));
 

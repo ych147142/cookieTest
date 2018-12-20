@@ -107,7 +107,7 @@ public class JdbcUtil {
         }
         return lists;
     }
-
+    /*查找一个*/
     public static <T> T queryOne(String sql, RowMap<T> rm, Object... obj){
         T t = null;
         Connection conn = null;
@@ -129,6 +129,28 @@ public class JdbcUtil {
             e.printStackTrace();
         }
         return t;
+    }
+    /*查数据条数*/
+    public static <T> int executeCount(String sql,Object... obj){
+        int a = 0;
+        Connection conn = null;
+        PreparedStatement sta = null;
+        conn = getConnection();
+        try {
+            sta = conn.prepareStatement(sql);
+            if (obj != null){
+                for (int i = 0 ;i < obj.length; i++){
+                    sta.setObject(i+1,obj[i]);
+                }
+            }
+            ResultSet rs = sta.executeQuery();
+            while (rs.next()){
+                a = rs.getInt(1);  //循环第一列
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return a;
     }
 
 

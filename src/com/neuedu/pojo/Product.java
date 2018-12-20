@@ -1,6 +1,6 @@
 package com.neuedu.pojo;
 
-public class Product {
+public class Product extends PageBean{
     private int productId;
     private String productName;
     private double price;

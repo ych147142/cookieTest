@@ -1,6 +1,7 @@
 package com.neuedu.controller;
 
 import com.neuedu.pojo.Product;
+import com.neuedu.pojo.ResultData;
 import com.neuedu.pojo.User;
 import com.neuedu.service.IProductService;
 import com.neuedu.service.IUserService;
@@ -22,6 +23,14 @@ public class ListServlet extends HttpServlet {
     private IUserService uservice = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setHeader("content-type","text/html;charset = UTF-8");
+        int pageNo = req.getParameter("pageNo") == null?1:Integer.parseInt(req.getParameter("pageNo"));
+        int pageSize = 3;
+
+        ResultData data = service.getLists(pageNo,pageSize);
+        data.setUrl("list");
+        req.setAttribute("data",data);
 
         Cookie[] cookies = req.getCookies();
         Map<String,Cookie> maps = CookieUtil.getCookie(cookies);
@@ -29,8 +38,8 @@ public class ListServlet extends HttpServlet {
         String uname = coo.getValue();
         HttpSession session = req.getSession();
         User u = (User)session.getAttribute("user");
-        List<Product> lists = service.getLists();
-        req.setAttribute("lists",lists);
+
+
         if (u == null){
             User user = uservice.getOne(uname);
             session.setAttribute("user",user);
